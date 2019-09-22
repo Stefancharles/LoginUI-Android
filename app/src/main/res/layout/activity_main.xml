@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gotham"
-                android:text="Good "
+                android:text="@string/good"
                 android:textColor="#ffffff"
                 android:textSize="32sp" />
 
@@ -56,7 +56,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/gotham"
-                android:text="Morning"
+                android:text="@string/morning"
                 android:textColor="#ffffff"
                 android:textSize="32sp" />
 
@@ -79,9 +79,10 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/calibri"
         android:gravity="center"
-        android:text="We pursue a relaxed gaming experience"
+        android:text="@string/hello"
         android:textColor="#9affffff"
-        android:textSize="10sp" />
+        android:textSize="10sp"
+        tools:ignore="SmallSp" />
 
 
     <LinearLayout
@@ -89,7 +90,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="12dp"
         android:orientation="vertical"
         android:paddingLeft="32dp"
         android:paddingRight="32dp">
@@ -102,12 +104,13 @@
             android:theme="@style/EditScreenTextInputLayoutStyle">
 
             <EditText
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawablePadding="16dp"
-                android:drawableRight="@drawable/ic_email_white_24dp"
+                android:drawableEnd="@drawable/ic_email_white_24dp"
                 android:fontFamily="@font/calibri"
-                android:hint="Email"
+                android:hint="@string/username"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:textColor="@android:color/white"
@@ -121,18 +124,52 @@
             android:theme="@style/EditScreenTextInputLayoutStyle">
 
             <EditText
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawablePadding="16dp"
-                android:drawableRight="@drawable/ic_lock_white_24dp"
+                android:drawableEnd="@drawable/ic_lock_white_24dp"
                 android:fontFamily="@font/calibri"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
         </android.support.design.widget.TextInputLayout>
 
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="45dp">
+                <EditText
+                    android:id="@+id/et_phoneCodes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:textStyle="bold"
+                    android:textColor="#96ffffff"
+                    android:textSize="16sp"
+                    android:hint="@string/pic_number" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,39 +179,44 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/buttonshapewhitebg"
                 android:fontFamily="@font/calibri"
-                android:text="Sign up"
+                android:text="@string/sign_up"
                 android:textAllCaps="false"
                 android:textStyle="bold"
                 android:textColor="#96ffffff"
-                android:textSize="16dp" />
+                android:textSize="16sp"
+                tools:ignore="ButtonStyle" />
 
             <Button
+                android:id="@+id/login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:background="@drawable/buttonshapewhitebg"
                 android:fontFamily="@font/calibri"
-                android:text="Sign in"
+                android:text="@string/sign_in"
                 android:textAllCaps="false"
                 android:textColor="#96ffffff"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="ButtonStyle" />
 
 
         </LinearLayout>
 
 
         <TextView
+            android:id="@+id/forget_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/calibri"
-            android:text="Forgot Password?"
+            android:text="@string/forgot_password"
             android:textAlignment="center"
             android:textColor="#96ffffff"
             android:textSize="16sp" />
