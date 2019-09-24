@@ -36,7 +36,7 @@ public class CodeUtils {
     private static final int DEFAULT_HEIGHT = 100;//默认高度.图片的总高
     private static final int DEFAULT_COLOR = 0xDF;//默认背景颜色值
 
-    private String code;
+    private static String code;
 
     public static CodeUtils getInstance() {
         if(mCodeUtils == null) {
@@ -78,7 +78,7 @@ public class CodeUtils {
      * 得到图片中的验证码字符串
      * @return
      */
-    public String getCode() {
+    public static String getCode() {
         return code;
     }
 

@@ -4,11 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
     TextView textView;
+    TextView forget_password;
     private EditText username;   //账户
     private EditText password;  //密码
     private SharedPreferences sp;
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private Bitmap bitmap;
     private String code;//正确的验证码
     private String codeStr;//用户输入的验证码
+    private EditText et_phoneCodes;
     int count = 0;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -53,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
         sp = getSharedPreferences("nlecloud",MODE_PRIVATE);
         editor = sp.edit();
         final Button login = findViewById(R.id.login);
+        final Button sign_up = findViewById(R.id.sign_up);
         //获取需要展示图片验证码的ImageView
-        final ImageView image = (ImageView) findViewById(R.id.image);
+        final ImageView image = findViewById(R.id.image);
         //获取工具类生成的图片验证码对象
         bitmap = CodeUtils.getInstance().createBitmap();
         //获取当前图片验证码的对应内容用于校验
@@ -62,9 +68,16 @@ public class MainActivity extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-
+        et_phoneCodes =findViewById(R.id.et_phoneCodes);
         imageView = findViewById(R.id.imageView);
         textView = findViewById(R.id.textView);
+        forget_password = findViewById(R.id.forget_password);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+
         // TODO: 2019/9/22  判断SharedPreferences文件中，用户名、密码是否存在
         if (sp.getString("username",_username)!=null && sp.getString("password",_password)!=null){
             if (!sp.getString("username",_username).equals("") && !sp.getString("password",_password).equals("")){
@@ -107,12 +120,40 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO: 2019/9/22  对图片验证码进行验证，验证成功则进行登陆
-
-
+                /*codeStr = et_phoneCodes.getText().toString().trim();
+                Log.e("codeStr", codeStr);
+                if (null == codeStr || TextUtils.isEmpty(codeStr)) {
+                    Toast.makeText(MainActivity.this,"Please Enter confirmation code.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String code = CodeUtils.getCode();
+                Log.e("code", code);
+                if (code.equalsIgnoreCase(codeStr)) {
+                    Toast.makeText(MainActivity.this,"Welcome Home!.",Toast.LENGTH_SHORT).show();
+                    signIn();//验证码正确后进行账号和密码的验证
+                } else {
+                    Toast.makeText(MainActivity.this,"Please Enter the Right confirmation code.",Toast.LENGTH_SHORT).show();
+                    bitmap = CodeUtils.getInstance().createBitmap();
+                    code = CodeUtils.getInstance().getCode();
+                    image.setImageBitmap(bitmap);//输入错误后更换验证码
+                }*/
                 signIn();
+
             }
         });
 
+        sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,"Registration function is not open yet...",Toast.LENGTH_SHORT).show();
+            }
+        });
+        forget_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,"Sometimes you have forget something so that you could move on.",Toast.LENGTH_LONG).show();
+            }
+        });
 
         image.setImageBitmap(bitmap);
         // TODO: 2019/9/22 更换图片验证码内容
@@ -180,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
                         String accessToken = baseResponseEntity.getResultObj().getAccessToken();
                         Toast.makeText(MainActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                        Intent intent = new Intent(MainActivity.this, ShowTemp.class);
                         Bundle bundle = new Bundle();
                         bundle.putString("accessToken", accessToken);
                         intent.putExtras(bundle);
